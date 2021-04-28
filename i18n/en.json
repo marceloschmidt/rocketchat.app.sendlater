@@ -1,0 +1,4 @@
+{
+    "Params": "new, list, help",
+    "Description": "Interacts with the SendLater App. Type `/sendlater help` for more info."
+}

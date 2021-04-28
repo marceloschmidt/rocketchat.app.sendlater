@@ -1,0 +1,29 @@
+{
+    "id": "59d357c0-cf0a-41c2-8413-f969c8174e74",
+    "version": "0.0.1",
+    "requiredApiVersion": "^1.19.0",
+    "iconFile": "icon.png",
+    "author": {
+        "name": "Marcelo Schmidt",
+        "homepage": "https://github.com/marceloschmidt",
+        "support": "https://github.com/marceloschmidt/rocketchat.app.sendlater"
+    },
+    "name": "Send Later",
+    "nameSlug": "send-later",
+    "classFile": "SendLaterApp.ts",
+    "description": "Schedule the delivery of a message",
+    "permissions": [
+        {
+            "name": "slashcommand"
+        },
+        {
+            "name": "message.write"
+        },
+        {
+            "name": "scheduler"
+        }
+    ],
+    "implements": [
+        "IUIKitInteractionHandler"
+    ]
+}
