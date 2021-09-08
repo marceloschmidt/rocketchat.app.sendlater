@@ -1,7 +1,6 @@
 import { IModify, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { TextObjectType } from '@rocket.chat/apps-engine/definition/uikit/blocks';
 import { IUIKitModalViewParam } from '@rocket.chat/apps-engine/definition/uikit/UIKitInteractionResponder';
-import { AlertsEnum } from '../enum/Alerts';
 import { BlocksEnum } from '../enum/Blocks';
 import { ScheduleEnum } from '../enum/Schedule';
 
@@ -36,7 +35,7 @@ export async function ScheduleModal({ modify, read }: {
 		id: viewId,
 		title: {
 			type: TextObjectType.PLAINTEXT,
-			text: AlertsEnum.DEFAULT_TITLE,
+			text: ScheduleEnum.TITLE,
 		},
         submit: block.newButtonElement({
             text: {

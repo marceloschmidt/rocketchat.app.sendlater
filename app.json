@@ -1,7 +1,7 @@
 {
     "id": "59d357c0-cf0a-41c2-8413-f969c8174e74",
     "version": "0.0.1",
-    "requiredApiVersion": "^1.19.0",
+    "requiredApiVersion": "^1.19.1",
     "iconFile": "icon.png",
     "author": {
         "name": "Marcelo Schmidt",
@@ -21,6 +21,18 @@
         },
         {
             "name": "scheduler"
+        },
+        {
+            "name": "ui.interact"
+        },
+        {
+            "name": "persistence"
+        },
+        {
+            "name": "room.read"
+        },
+        {
+            "name": "message.read"
         }
     ],
     "implements": [

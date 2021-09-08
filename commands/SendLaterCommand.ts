@@ -4,7 +4,7 @@ import { Schedule } from '../actions/Schedule';
 import { CommandsEnum } from '../enum/Commands';
 import { ErrorsEnum } from '../enum/Errors';
 
-import { sendRoomMessage } from "../lib/Rooms";
+import { notifyUser } from "../lib/Message";
 import { SendLaterApp } from '../SendLaterApp';
 import { Help } from './HelpCommand';
 
@@ -26,16 +26,19 @@ export class SendLaterCommand implements ISlashCommand {
                 case CommandsEnum.CANCEL:
                     const jobId = params[0];
                     if (jobId) {
-                        console.log('I will cancel a scheduled task.️🔥', jobId);
                         await modify.getScheduler().cancelJob(jobId);
                     }
                     break;
+                case CommandsEnum.LIST:
+                    await Schedule.list({ app: this.app, triggerId: context.getTriggerId(), sender: context.getSender(), read, modify, persistence });
+                    break;
                 default:
-                    await Schedule.run({ app: this.app, context, read, modify });
+                    await Schedule.run({ app: this.app, context, read, modify, persistence });
                     break;
             }
         } catch (error) {
-            await sendRoomMessage({ app: this.app, read, modify, room: context.getRoom(), text: error.message || ErrorsEnum.OPERATION_FAILED });
+            const appId = this.app.getID();
+            await notifyUser({ appId, read, modify, room: context.getRoom(), user: context.getSender(), text: error.message || ErrorsEnum.OPERATION_FAILED });
             this.app.getLogger().error(error.message);
         }
     }

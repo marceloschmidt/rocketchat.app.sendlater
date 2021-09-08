@@ -3,4 +3,5 @@ export enum CommandsEnum {
 	NEW = 'new',
 	VIEW = 'view',
 	CANCEL = 'cancel',
+	LIST = 'list',
 }
