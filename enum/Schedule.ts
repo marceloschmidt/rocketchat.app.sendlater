@@ -6,6 +6,7 @@ export enum ScheduleEnum {
     VIEW_LIST_ID = 'schedule-list',
     TIME_ACTION_ID = 'time',
     TIME_LABEL = 'When do you want the message to be sent?',
+    TIME_PLACEHOLDER = '10 minutes, 18:15, 2022-01-01T00:00:00',
     MESSAGE_ACTION_ID = 'message',
     MESSAGE_LABEL = 'What is your message?',
     CANCEL = 'Cancel',

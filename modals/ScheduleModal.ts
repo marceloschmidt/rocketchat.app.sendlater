@@ -13,7 +13,7 @@ export async function ScheduleModal({ modify, read }: {
 
     block.addInputBlock({
         blockId: ScheduleEnum.VIEW_ID,
-        element: block.newPlainTextInputElement({ actionId: ScheduleEnum.TIME_ACTION_ID }),
+        element: block.newPlainTextInputElement({ actionId: ScheduleEnum.TIME_ACTION_ID, placeholder: { type: TextObjectType.PLAINTEXT, text: ScheduleEnum.TIME_PLACEHOLDER }}),
         label: {
             type: TextObjectType.PLAINTEXT,
             text: ScheduleEnum.TIME_LABEL,
