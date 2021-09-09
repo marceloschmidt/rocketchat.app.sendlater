@@ -14,7 +14,7 @@ class HelpCommand {
                 \`/sendlater list\` List scheduled messages
                 \`/sendlater help\` Shows help message`;
 
-        await notifyUser({ appId, read, modify, room, user, text });
+        await notifyUser({ appId, read, modify, room, user, text, threadId: context.getThreadId() });
     }
 }
 

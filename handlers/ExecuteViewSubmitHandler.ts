@@ -1,5 +1,5 @@
 import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
-import { IUIKitView, UIKitViewSubmitInteractionContext } from '@rocket.chat/apps-engine/definition/uikit';
+import { UIKitViewSubmitInteractionContext } from '@rocket.chat/apps-engine/definition/uikit';
 import { Schedule } from '../actions/Schedule';
 import { ScheduleEnum } from '../enum/Schedule';
 import { dialogModal } from '../modals/DialogModal';

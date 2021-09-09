@@ -72,6 +72,7 @@ class ScheduleAction {
             } as IButtonElement,
             ],
         });
+
         await notifyUser({ appId, read, modify, room: uiData.room, user, threadId: uiData.threadId, blocks });
 	}
 

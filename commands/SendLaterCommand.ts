@@ -38,7 +38,7 @@ export class SendLaterCommand implements ISlashCommand {
             }
         } catch (error) {
             const appId = this.app.getID();
-            await notifyUser({ appId, read, modify, room: context.getRoom(), user: context.getSender(), text: error.message || ErrorsEnum.OPERATION_FAILED });
+            await notifyUser({ appId, read, modify, room: context.getRoom(), user: context.getSender(), text: error.message || ErrorsEnum.OPERATION_FAILED, threadId: context.getThreadId() });
             this.app.getLogger().error(error.message);
         }
     }

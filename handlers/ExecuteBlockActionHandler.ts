@@ -1,6 +1,7 @@
 import { IHttp, IModify, IPersistence, IRead } from '@rocket.chat/apps-engine/definition/accessors';
 import { IUIKitView, UIKitBlockInteractionContext, UIKitViewSubmitInteractionContext } from '@rocket.chat/apps-engine/definition/uikit';
 import { Schedule } from '../actions/Schedule';
+import { ErrorsEnum } from '../enum/Errors';
 import { ScheduleEnum } from '../enum/Schedule';
 import { notifyUser } from '../lib/Message';
 import { removeTaskPersistence } from '../lib/persistence';
@@ -22,12 +23,17 @@ export class ExecuteBlockActionHandler {
             const data = context.getInteractionData();
             switch (data.actionId) {
                 case ScheduleEnum.CANCEL_ID:
-                    await removeTaskPersistence(this.read.getPersistenceReader(), this.persistence, data.user.id, data.value);
-                    if (data.container?.type === 'view') {
-                        const modal = await ScheduleListModal({ read: this.read, modify: this.modify, user: data.user });
-                        return context.getInteractionResponder().updateModalViewResponse(modal);
+                    if (data.value) {
+                        await this.modify.getScheduler().cancelJob(data.value);
+                        await removeTaskPersistence(this.read.getPersistenceReader(), this.persistence, data.user.id, data.value);
+                        if (data.container?.type === 'view') {
+                            const modal = await ScheduleListModal({ read: this.read, modify: this.modify, user: data.user });
+                            return context.getInteractionResponder().updateModalViewResponse(modal);
+                        } else if (data.room) {
+                            await notifyUser({ appId: this.app.getID(), read: this.read, modify: this.modify, room: data.room, user: data.user, text: ScheduleEnum.CANCELLED });
+                        }
                     } else if (data.room) {
-                        await notifyUser({ appId: this.app.getID(), read: this.read, modify: this.modify, room: data.room, user: data.user, text: ScheduleEnum.CANCELLED });
+                        await notifyUser({ appId: this.app.getID(), read: this.read, modify: this.modify, room: data.room, user: data.user, text: ErrorsEnum.OPERATION_FAILED });
                     }
                     break;
                 case ScheduleEnum.VIEW_LIST_ID:

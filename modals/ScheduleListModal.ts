@@ -1,5 +1,4 @@
 import { IModify, IRead } from '@rocket.chat/apps-engine/definition/accessors';
-import { SlashCommandContext } from '@rocket.chat/apps-engine/definition/slashcommands';
 import { BlockElementType, TextObjectType } from '@rocket.chat/apps-engine/definition/uikit/blocks';
 import { IUIKitModalViewParam } from '@rocket.chat/apps-engine/definition/uikit/UIKitInteractionResponder';
 import { IUser } from '@rocket.chat/apps-engine/definition/users';
@@ -19,10 +18,6 @@ export async function ScheduleListModal({ read, modify, user }: {
     if (tasks.length > 0) {
         for (const task of tasks) {
             const room = await read.getRoomReader().getById(task.roomId);
-            const start = task.start.toISOString();
-
-            const [ date, time ] = start.split('T');
-            const [hour, minute, second] = time.split('.')[0].split(':');
 
             let text = '';
             text += `*Message*: ${ task.message.substr(0, 100) + (task.message.length > 100 ? '...' : '') }`;

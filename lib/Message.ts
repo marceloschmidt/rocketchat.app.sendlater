@@ -1,16 +1,15 @@
 import { IModify, IRead } from '@rocket.chat/apps-engine/definition/accessors';
-import { IApp } from '@rocket.chat/apps-engine/definition/IApp';
 import { IMessageAttachment } from '@rocket.chat/apps-engine/definition/messages';
 import { IRoom } from '@rocket.chat/apps-engine/definition/rooms';
 import { BlockBuilder } from '@rocket.chat/apps-engine/definition/uikit';
 import { IUser } from '@rocket.chat/apps-engine/definition/users';
-import { Logs } from '../enum/Logs';
+import { ErrorsEnum } from '../enum/Errors';
 import { ScheduleEnum } from '../enum/Schedule';
 
 export const notifyUser = async ({ appId, read, modify, room, user, text, attachments, blocks, threadId }: { appId: string, read: IRead, modify: IModify, room: IRoom, user: IUser, text?: string, attachments?: Array<IMessageAttachment>, blocks?: BlockBuilder, threadId?: string }): Promise<void> => {
     const appUser = await read.getUserReader().getAppUser(appId);
     if (!appUser) {
-        throw new Error(Logs.ERROR_GETTING_APP_USER);
+        throw new Error(ErrorsEnum.ERROR_GETTING_APP_USER);
     }
     const msg = modify.getCreator().startMessage()
         .setGroupable(false)
@@ -38,7 +37,7 @@ export const notifyUser = async ({ appId, read, modify, room, user, text, attach
 export const sendMessage = async ({ appId, read, modify, room, sender, text, attachments, blocks, threadId }: { appId: string, read: IRead, modify: IModify, room: IRoom, sender: IUser, text?: string, attachments?: Array<IMessageAttachment>, blocks?: BlockBuilder, threadId?: string }): Promise<void> => {
     const appUser = await read.getUserReader().getAppUser(appId);
     if (!appUser) {
-        throw new Error(Logs.ERROR_GETTING_APP_USER);
+        throw new Error(ErrorsEnum.ERROR_GETTING_APP_USER);
     }
     const msg = modify.getCreator().startMessage()
         .setGroupable(false)
